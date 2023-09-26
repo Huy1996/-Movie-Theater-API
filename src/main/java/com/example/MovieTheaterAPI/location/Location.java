@@ -8,7 +8,6 @@ import lombok.*;
 @Getter
 @AllArgsConstructor
 @NoArgsConstructor
-
 @Entity
 @Table(name = "locations")
 public class Location {
@@ -24,6 +23,7 @@ public class Location {
   @Column(name = "state", nullable = false)
   private String state;
 
+  // Todo: Waiting for Screen
   @Column(name = "theater", nullable = false)
   private String theater;
 
