@@ -4,9 +4,10 @@ import java.util.List;
 
 public interface DiscountService {
 
-  List<Discount> getAllDiscount();
+  List<Discount> getAllDiscounts();
   Discount getDiscountById(Long id);
-  List<Discount> getDiscountByHappyHour(float isHappyHourBefore6PM);
-  List<Discount> getDiscountByTuesday(boolean isTuesdayDiscount);
+  Discount createDiscount(Discount discount);
+  Discount updateDiscount(Long id, Discount discount);
+  void deleteDiscount(Long id);
   
 }

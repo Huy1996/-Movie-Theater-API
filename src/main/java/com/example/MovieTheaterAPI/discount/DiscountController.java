@@ -5,14 +5,14 @@ import java.util.List;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/discount")
+@RequestMapping("/discounts")
 public class DiscountController {
 
   DiscountService discountService;
 
   @GetMapping("/")
-  public List<Discount> getAllDiscount(){
-    return discountService.getAllDiscount();
+  public List<Discount> getAllDiscounts(){
+    return discountService.getAllDiscounts();
   }
 
   @GetMapping("/{id}")
@@ -20,14 +20,19 @@ public class DiscountController {
     return discountService.getDiscountById(id);
   }
 
-  @GetMapping("/happy-hour/{isHappyHourBefore6PM}")
-  public List<Discount> getDiscountByHappyHour(@PathVariable boolean isHappyHourBefore6PM) {
-    return discountService.getDiscountByHappyHour(isHappyHourBefore6PM);
+  @PostMapping
+  public Discount createDiscount(@RequestBody Discount discount) {
+    return discountService.createDiscount(discount);
   }
 
-  @GetMapping("/tuesday/{isTuesdayDiscount}")
-  public List<Discount> getDiscountByTuesday(@PathVariable boolean isTuesdayDiscount) {
-    return discountService.getDiscountByTuesday(isTuesdayDiscount);
+  @PutMapping("/{id}")
+  public Discount updateDiscount(@PathVariable Long id, @RequestBody Discount discount) {
+    return discountService.updateDiscount(id, discount);
+  }
+
+  @DeleteMapping("/{id}")
+  public void deleteDiscount(@PathVariable Long id) {
+    discountService.deleteDiscount(id);
   }
   
 }

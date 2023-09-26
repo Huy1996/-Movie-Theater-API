@@ -16,13 +16,13 @@ public class Discount {
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Long id;
 
-  @Column(name = "title")
+  @Column(name = "title", nullable = false)
   private String title;
 
-  @Column(name = "before_6pm")
+  @Column(name = "before_6pm", nullable = false)
   private float isHappyHourBefore6PM;
 
-  @Column(name = "tuesday_discount")
+  @Column(name = "tuesday_discount", nullable = false)
   private float isTuesdayDiscount;
   
 }
