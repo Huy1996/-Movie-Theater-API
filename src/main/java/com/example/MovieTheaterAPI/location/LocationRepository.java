@@ -6,7 +6,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 
 public interface LocationRepository extends JpaRepository<Location, Long> {
-  List<Location> findAll();  
-  List<Location> findByCity(String city);
-  List<Location> findByState(String state);
+  List<Location> findByStateAndCity(String state, String city);
 }

@@ -22,15 +22,9 @@ public class LocationServiceImpl implements LocationService{
 
   }
 
-
   @Override
-  public List<Location> getLocationsByState(String state) {
-    return locationRepository.findByState(state);
-  }
-
-  @Override
-  public List<Location> getLocationsByCity(String city) {
-    return locationRepository.findByCity(city);
+  public List<Location> searchLocationsByStateAndCity(String state, String city) {
+      return locationRepository.findByStateAndCity(state, city);
   }
 
   @Override
@@ -41,19 +35,20 @@ public class LocationServiceImpl implements LocationService{
   @Override
   public Location updateLocation(Long id, Location updatedLocation){
 
-    Location existLocation = locationRepository.findById(id).orElse(null);
+    Location existingLocation = locationRepository.findById(id).orElse(null);
 
-    if (existLocation != null) {
-      // Update the existing location
-      existLocation.setState(updatedLocation.getState());
-      existLocation.setCity(updatedLocation.getCity());return locationRepository.save(existLocation);
+    if (existingLocation != null) {
+      existingLocation.setCity(updatedLocation.getCity());
+      existingLocation.setState(updatedLocation.getState());
+      existingLocation.setTheater(updatedLocation.getTheater());
+      return locationRepository.save(existingLocation);
     }
-    return null; // Handle the case where the location with the given Id not found
+    return null; 
   }
 
   @Override
-  public void deleteLocation(Location location){
-    locationRepository.delete(location);
+  public void deleteLocation(Long id){
+    locationRepository.deleteById(id);
   }
 
 }

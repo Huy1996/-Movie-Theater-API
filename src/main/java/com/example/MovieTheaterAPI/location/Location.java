@@ -24,4 +24,7 @@ public class Location {
   @Column(name = "state", nullable = false)
   private String state;
 
+  @Column(name = "theater", nullable = false)
+  private String theater;
+
 }
