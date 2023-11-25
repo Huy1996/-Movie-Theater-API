@@ -2,6 +2,7 @@ package com.example.MovieTheaterAPI.user;
 
 import com.example.MovieTheaterAPI.security.CustomAuthentication;
 import com.example.MovieTheaterAPI.user.dto.ChangePasswordDTO;
+import com.example.MovieTheaterAPI.user.dto.RedemPointDTO;
 import com.example.MovieTheaterAPI.user.dto.UpgradeAccountDTO;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.*;
@@ -35,6 +36,19 @@ public class UserController {
             return ResponseEntity.ok(user);
         } catch (UserNotFoundException e) {
             return ResponseEntity.notFound().build();
+        }
+    }
+
+    @PutMapping("/redeem")
+    public ResponseEntity<?> redeemPoint(@RequestBody RedemPointDTO dto) {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        CustomAuthentication auth = (CustomAuthentication) authentication;
+        try {
+            Member member = memberService.addPoint(auth.getId(), -dto.getAmount());
+            return ResponseEntity.ok(member);
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+            return ResponseEntity.badRequest().build();
         }
     }
 
